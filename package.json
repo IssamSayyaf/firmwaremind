@@ -1,0 +1,23 @@
+{
+  "name": "firmware-mind-website",
+  "version": "1.0.0",
+  "description": "Professional embedded systems consulting website for Firmware Mind",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "test": "echo \"Testing website...\" && exit 0"
+  },
+  "keywords": [
+    "embedded systems",
+    "embedded linux",
+    "zephyr rtos",
+    "firmware development",
+    "consulting"
+  ],
+  "author": "Firmware Mind",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/embedexpert-website"
+  }
+}

@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استشارات الأنظمة المدمجة | خبراء لينكس و Zephyr RTOS</title>
+    <meta name="description" content="خدمات استشارية احترافية في الأنظمة المدمجة متخصصة في لينكس المدمج، Zephyr RTOS، وتطوير البرمجيات الثابتة المخصصة. تتوفر دورات تدريبية متخصصة.">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts - Arabic Support -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --border-color: #e2e8f0;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+            --section-padding: 100px 0;
+            --container-padding: 0 20px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+            text-align: right;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--container-padding);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.75rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .gradient-text {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .nav-brand a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .brand-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-left: 10px;
+        }
+
+        .brand-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-right: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* About Section */
+        .about {
+            padding: var(--section-padding);
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            color: var(--text-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-features {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .about-feature i {
+            color: var(--secondary-color);
+            font-size: 1.25rem;
+            margin-top: 0.25rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background: var(--light-bg);
+            border-radius: 16px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: var(--section-padding);
+            background: var(--light-bg);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            border-color: var(--primary-light);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            margin-bottom: 0.5rem;
+            padding-right: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .service-features li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            color: var(--secondary-color);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: var(--section-padding);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-img {
+            height: 240px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover .portfolio-img img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 2rem;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: var(--section-padding);
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item i {
+            width: 50px;
+            height: 50px;
+            background: var(--light-bg);
+            color: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            text-align: right;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 80px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p {
+            color: #94a3b8;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+            padding-right: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content, .contact-content, .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .hero-title { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="#home">
+                    <span class="brand-icon"><img src="images/logo.png" alt="Firmware Mind Logo" style="height: 40px; width: auto; vertical-align: middle;"></span>
+                    <span class="brand-text">Firmware Mind</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">الرئيسية</a></li>
+                <li><a href="#about" class="nav-link">من نحن</a></li>
+                <li><a href="#services" class="nav-link">خدماتنا</a></li>
+                <li><a href="#portfolio" class="nav-link">أعمالنا</a></li>
+                <li><a href="#contact" class="nav-link">اتصل بنا</a></li>
+                <li class="lang-switch"><a href="index.html" class="nav-link" style="color: var(--primary-color); font-weight: 600;">English</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">استشارات وتدريب</span>
+                    <br>الأنظمة المدمجة
+                </h1>
+                <p class="hero-subtitle">
+                    خدمات استشارية خبيرة في لينكس المدمج، Zephyr RTOS، وتطوير البرمجيات الثابتة. 
+                    حول أنظمتك المدمجة بخبرة رائدة في الصناعة.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">استكشف خدماتنا</a>
+                    <a href="#contact" class="btn btn-outline">تواصل معنا</a>
+                </div>
+                <div class="hero-stats" style="display: flex; gap: 3rem; justify-content: center; margin-top: 3rem;">
+                    <div class="stat" style="display: flex; flex-direction: column;">
+                        <span class="stat-number" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color);">5+</span>
+                        <span class="stat-label" style="color: var(--text-light);">سنوات خبرة</span>
+                    </div>
+                    <div class="stat" style="display: flex; flex-direction: column;">
+                        <span class="stat-number" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color);">10+</span>
+                        <span class="stat-label" style="color: var(--text-light);">مشاريع منجزة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">حول <span class="gradient-text">Firmware Mind</span></h2>
+            <p class="section-subtitle">نقود مستقبل تطوير الأنظمة المدمجة</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>من نحن</h3>
+                    <p>Firmware Mind هي شركة استشارية رائدة في الأنظمة المدمجة متخصصة في تطوير نواة لينكس، Zephyr RTOS، وحلول البرمجيات الثابتة المخصصة. مع أكثر من عقد من الخبرة، ساعدنا الشركات في جميع أنحاء العالم على تحويل بنية أنظمتها المدمجة وتسريع تطوير المنتجات.</p>
+                    <p>يجمع فريقنا من المهندسين الخبراء بين المعرفة التقنية العميقة والخبرة الصناعية العملية لتقديم حلول ليست وظيفية فحسب، بل محسنة للأداء والموثوقية والقابلية للتوسع.</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>خبرة صناعية</h4>
+                                <p>معرفة عميقة عبر إنترنت الأشياء، السيارات، الأجهزة الطبية، والأتمتة الصناعية</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>سجل حافل</h4>
+                                <p>تم تسليم أكثر من 10 مشاريع بنجاح</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>التزام بالجودة</h4>
+                                <p>مراجعة الكود، الاختبار الآلي، وتوثيق شامل</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>نهج مرن (Agile)</h4>
+                                <p>نماذج تعاقد مرنة ودورات تكرار سريعة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-award" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                        <div class="stat-number">5+</div>
+                        <p>سنوات في العمل</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                        <div class="stat-number">10+</div>
+                        <p>عملاء حول العالم</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">خدماتنا</h2>
+            <p class="section-subtitle">حلول شاملة للأنظمة المدمجة مصممة لتلبية احتياجاتك</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>البحث والتطوير للمنتجات</h3>
+                    <p>نقدم خدمات البحث والتطوير المتكاملة لحلول الأجهزة والبرمجيات الخاصة بك، محولين أفكارك الرؤيوية إلى منتجات جاهزة للسوق.</p>
+                    <ul class="service-features">
+                        <li>التصميم المشترك للأجهزة والبرمجيات</li>
+                        <li>تطوير إثبات المفهوم (PoC)</li>
+                        <li>النماذج الأولية السريعة</li>
+                        <li>تصميم بنية المنتج</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-linux"></i>
+                    </div>
+                    <h3>تطوير لينكس المدمج</h3>
+                    <p>تطوير نواة لينكس المخصصة، مشروع Yocto، Buildroot، برامج تشغيل الأجهزة، وتطوير BSP لمنصات الأجهزة الخاصة بك.</p>
+                    <ul class="service-features">
+                        <li>تخصيص وتحسين النواة</li>
+                        <li>تطوير برامج تشغيل الأجهزة</li>
+                        <li>إعداد Yocto/Buildroot</li>
+                        <li>تحسين عملية الإقلاع</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>حلول Zephyr RTOS</h3>
+                    <p>أنظمة مدمجة في الوقت الحقيقي مع Zephyr RTOS لأجهزة إنترنت الأشياء، الأجهزة القابلة للارتداء، والمنصات محدودة الموارد.</p>
+                    <ul class="service-features">
+                        <li>تطوير تطبيقات Zephyr</li>
+                        <li>دعم اللوحات المخصصة</li>
+                        <li>تنفيذ برامج التشغيل</li>
+                        <li>إدارة الطاقة</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>تطوير البرمجيات الثابتة</h3>
+                    <p>تطوير البرمجيات الثابتة منخفضة المستوى للمتحكمات الدقيقة والمعالجات المدمجة مع التركيز على الأداء والموثوقية.</p>
+                    <ul class="service-features">
+                        <li>البرمجة المباشرة (Bare-metal)</li>
+                        <li>تطوير محمل الإقلاع (Bootloader)</li>
+                        <li>تنفيذ طبقة HAL</li>
+                        <li>بروتوكولات الاتصال</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>تدريب احترافي</h3>
+                    <p>برامج تدريبية شاملة في الأنظمة المدمجة، برمجة نواة لينكس، وتطوير أنظمة التشغيل في الوقت الحقيقي.</p>
+                    <ul class="service-features">
+                        <li>برامج تدريب الشركات</li>
+                        <li>دورات عبر الإنترنت</li>
+                        <li>ورش عمل تطبيقية</li>
+                        <li>مناهج مخصصة</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>تعلم الآلة</h3>
+                    <p>تطوير ونشر نماذج تعلم الآلة للأجهزة الطرفية والمنصات السحابية، متخصصون في التحليلات التنبؤية والتعرف على الأنماط.</p>
+                    <ul class="service-features">
+                        <li>تنفيذ الذكاء الاصطناعي الطرفي (Edge AI)</li>
+                        <li>الصيانة التنبؤية</li>
+                        <li>الكشف عن الشذوذ</li>
+                        <li>تحسين النماذج للمتحكمات الدقيقة</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>التعلم العميق</h3>
+                    <p>حلول الشبكات العصبية المتقدمة للمهام المعقدة مثل الرؤية الحاسوبية، معالجة اللغات الطبيعية، وتحليل الصور الطبية.</p>
+                    <ul class="service-features">
+                        <li>الرؤية الحاسوبية (CNN)</li>
+                        <li>معالجة اللغات الطبيعية (BERT)</li>
+                        <li>تحليل الصور الطبية</li>
+                        <li>تحسين وتبسيط الشبكات العصبية</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="technologies" style="padding: var(--section-padding); background: var(--light-bg);">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;">التقنيات التي نعمل بها</h2>
+            <p class="section-subtitle" style="text-align: center; color: var(--text-light); margin-bottom: 3rem;">خبرة واسعة عبر منظومة الأنظمة المدمجة</p>
+            
+            <div class="tech-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div class="tech-item" style="background: var(--white); padding: 30px; border-radius: 12px; text-align: center; transition: var(--transition); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <i class="fab fa-linux" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <h4 style="font-size: 1rem; margin-bottom: 0;">نواة لينكس</h4>
+                </div>
+                <div class="tech-item" style="background: var(--white); padding: 30px; border-radius: 12px; text-align: center; transition: var(--transition); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <i class="fas fa-microchip" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <h4 style="font-size: 1rem; margin-bottom: 0;">Zephyr RTOS</h4>
+                </div>
+                <div class="tech-item" style="background: var(--white); padding: 30px; border-radius: 12px; text-align: center; transition: var(--transition); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <i class="fas fa-code" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <h4 style="font-size: 1rem; margin-bottom: 0;">C/C++</h4>
+                </div>
+                <div class="tech-item" style="background: var(--white); padding: 30px; border-radius: 12px; text-align: center; transition: var(--transition); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <i class="fas fa-cogs" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <h4 style="font-size: 1rem; margin-bottom: 0;">Yocto Project</h4>
+                </div>
+                <div class="tech-item" style="background: var(--white); padding: 30px; border-radius: 12px; text-align: center; transition: var(--transition); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <i class="fas fa-tools" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <h4 style="font-size: 1rem; margin-bottom: 0;">Buildroot</h4>
+                </div>
+                <div class="tech-item" style="background: var(--white); padding: 30px; border-radius: 12px; text-align: center; transition: var(--transition); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <i class="fas fa-network-wired" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <h4 style="font-size: 1rem; margin-bottom: 0;">برامج تشغيل الأجهزة</h4>
+                </div>
+                <div class="tech-item" style="background: var(--white); padding: 30px; border-radius: 12px; text-align: center; transition: var(--transition); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <i class="fas fa-server" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <h4 style="font-size: 1rem; margin-bottom: 0;">ARM Cortex</h4>
+                </div>
+                <div class="tech-item" style="background: var(--white); padding: 30px; border-radius: 12px; text-align: center; transition: var(--transition); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <i class="fas fa-memory" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <h4 style="font-size: 1rem; margin-bottom: 0;">إنترنت الأشياء</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">أعمالنا الأخيرة</h2>
+            <p class="section-subtitle">عرض لخبرتنا في تطوير الأنظمة المدمجة</p>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <img src="images/Automotive Computer System.jpeg" alt="نظام حاسوب للسيارات">
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="tag">السيارات</span>
+                            <span class="tag">لينكس</span>
+                        </div>
+                        <h3>نظام حاسوب للسيارات</h3>
+                        <p>حل متكامل للأنظمة المدمجة في السيارات يعتمد على معالجات STM32MP1 و i.MX93، يوفر منصة قوية للتطبيقات الحديثة.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <img src="images/Medical Musical Device.jpg" alt="جهاز موسيقي طبي">
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="tag">طبي</span>
+                            <span class="tag">Zephyr</span>
+                        </div>
+                        <h3>جهاز موسيقي طبي</h3>
+                        <p>مشروع نظام مدمج متطور يجمع بين الأجهزة والبرمجيات لإنشاء كرة تفاعلية مع مستشعرات متعددة للتحكم في الحركة.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <img src="images/Wireless Crack Detection System.jpg" alt="نظام لاسلكي للكشف عن الشقوق">
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="tag">صناعي</span>
+                            <span class="tag">Yocto</span>
+                        </div>
+                        <h3>نظام لاسلكي للكشف عن الشقوق</h3>
+                        <p>نظام للكشف عن الشقوق في الوقت الحقيقي يجمع بين تقنية الانبعاث الصوتي وإنترنت الأشياء لمراقبة البنية التحتية.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <img src="images/RSNA.jpg" alt="الكشف عن سرطان الثدي RSNA">
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="tag">التعلم العميق</span>
+                            <span class="tag">طبي</span>
+                            <span class="tag">الرؤية الحاسوبية</span>
+                        </div>
+                        <h3>الكشف عن سرطان الثدي (RSNA)</h3>
+                        <p>نماذج تعلم عميق للكشف عن سرطان الثدي من صور الماموجرام، باستخدام تقنيات الرؤية الحاسوبية المتقدمة لتحسين دقة التشخيص.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <img src="images/Contradictory Text Analysis NLP.png" alt="تحليل النصوص المتناقضة NLP">
+                    </div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-tags">
+                            <span class="tag">NLP</span>
+                            <span class="tag">تعلم الآلة</span>
+                            <span class="tag">BERT</span>
+                        </div>
+                        <h3>تحليل النصوص المتناقضة (NLP)</h3>
+                        <p>تصنيف أزواج الجمل باستخدام نماذج BERT لتحديد التناقض أو التوافق أو الحياد عبر 15 لغة مختلفة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">تواصل معنا</h2>
+            <p class="section-subtitle">دعنا نناقش كيف يمكننا مساعدتك في مشروع الأنظمة المدمجة الخاص بك</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>معلومات الاتصال</h3>
+                    <p>هل أنت جاهز لبدء مشروعك؟ تواصل مع فريق الخبراء لدينا.</p>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p><a href="mailto:issamsayyaf97@gmail.com" style="color: inherit; text-decoration: none;">issamsayyaf97@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>الهاتف / واتساب</h4>
+                            <p>
+                                <a href="tel:+96352435937" style="color: inherit; text-decoration: none;">+963 52435937</a>
+                                <a href="https://wa.me/96352435937" target="_blank" style="color: #25D366; text-decoration: none; margin-right: 10px;" title="تواصل عبر واتساب">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>الموقع</h4>
+                            <p>حلب، سوريا</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>ساعات العمل</h4>
+                            <p>الأحد - السبت: 9:00 صباحاً - 6:00 مساءً بتوقيت شرق أوروبا</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="اسمك" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="company" placeholder="الشركة (اختياري)">
+                    </div>
+                    <div class="form-group">
+                        <select name="service" required>
+                            <option value="">اختر الخدمة</option>
+                            <option value="embedded-linux">تطوير لينكس المدمج</option>
+                            <option value="zephyr">تطوير Zephyr RTOS</option>
+                            <option value="firmware">تطوير البرمجيات الثابتة</option>
+                            <option value="training">التدريب والدورات</option>
+                            <option value="consulting">استشارات عامة</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <textarea name="message" placeholder="أخبرنا عن مشروعك" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><img src="images/logo.png" alt="Firmware Mind Logo" style="height: 30px; width: auto; vertical-align: middle; margin-left: 10px;"> Firmware Mind</h3>
+                    <p>شركة استشارية رائدة في الأنظمة المدمجة متخصصة في تطوير نواة لينكس، Zephyr RTOS، وحلول البرمجيات الثابتة المخصصة.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/issamsayyaf" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/issamsayyaf" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>خدماتنا</h3>
+                    <a href="#services">تطوير لينكس المدمج</a>
+                    <a href="#services">حلول Zephyr RTOS</a>
+                    <a href="#services">تطوير البرمجيات الثابتة</a>
+                    <a href="#services">تدريب احترافي</a>
+                    <a href="#services">بنية الأنظمة</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>الشركة</h3>
+                    <a href="#about">من نحن</a>
+                    <a href="#portfolio">أعمالنا</a>
+                    <a href="#contact">اتصل بنا</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Firmware Mind. جميع الحقوق محفوظة. | <a href="privacy-policy.html">سياسة الخصوصية</a> | <a href="terms.html">شروط الخدمة</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Navbar background on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Construct mailto link
+            const subject = encodeURIComponent(`استفسار عن مشروع من ${data.name} (${data.company || 'بدون شركة'})`);
+            const body = encodeURIComponent(`الاسم: ${data.name}\nالبريد الإلكتروني: ${data.email}\nالشركة: ${data.company || 'N/A'}\nالخدمة: ${data.service}\n\nالرسالة:\n${data.message}`);
+            
+            window.location.href = `mailto:issamsayyaf97@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Reset form
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
